@@ -1,337 +1,618 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-  </head>
-  <body>
-    <nav id="desktop-nav">
-      <div class="logo">SIRIAN</div>
-      <div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ian's Data Science Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #3498db;
+            --background-color: #ffffff;
+            --text-color: #2c3e50;
+            --card-bg: #f8f9fa;
+            --skill-border: rgba(46, 204, 113, 0.3);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #27ae60;
+            --secondary-color: #2980b9;
+            --background-color: #2c3e50;
+            --text-color: #ecf0f1;
+            --card-bg: #2a3b4a;  /* Slightly lighter than background */
+            --skill-border: rgba(46, 204, 113, 0.5);
+        }
+
+        .social-link {
+            color: var(--text-color);
+            transition: transform 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+    
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+    
+        /* Add this to your existing CSS variables */
+        :root {
+            --primary-color: #2ecc71;
+            --secondary-color: #3498db;
+            --background-color: #ffffff;
+            --text-color: #2c3e50;
+            --card-bg: #f8f9fa;
+            /* Add social media brand colors */
+            --linkedin: #0A66C2;
+            --twitter: #000000;
+            --kaggle: #20BEFF;
+        }
+    
+        [data-theme="dark"] {
+            --linkedin: #0A66C2;
+            --twitter: #FFFFFF;
+            --kaggle: #20BEFF;
+        }
+    
+        /* Optional: Add specific hover colors */
+        .fa-linkedin:hover { color: var(--linkedin) !important; }
+        .fa-x-twitter:hover { color: var(--twitter) !important; }
+        .fa-kaggle:hover { color: var(--kaggle) !important; }
+
+
+
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--card-bg) !important;
+        }
+
+        .theme-switch {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            z-index: 999;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-poster {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .skill-badge {
+            background: var(--primary-color);
+            color: white;
+            margin: 2px;
+        }
+
+        #hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 100px 0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button class="btn btn-primary theme-switch rounded-circle shadow" onclick="toggleTheme()">🌓</button>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#">Ian's Portfolio</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
-    <nav id="hamburger-nav">
-      <div class="logo">SIRIAN</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container text-center">
+            <h1 class="display-4 mb-4">Data Scientist & Machine Learning Engineer</h1>
+            <p class="lead">Transforming data into actionable insights</p>
         </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </div>
-      </div>
-    </nav>
-    <section id="profile">
-      <div class="section__pic-container">
-        <img src="SirIan71/SirIan71.github.io/assets/profile-pic.png" alt="John Doe profile picture" />
-      </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm </p>
-        <h1 class="title">IAN</h1>
-        <p class="section__text__p2">AI & ML Engineer</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="location.href='https://www.canva.com/design/DAGUqsf7C2g/A0T7pmnQRQKadYOmtBSZLg/view?utm_content=DAGUqsf7C2g&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h695579014b#1'"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            onclick="location.href='https://linkedin.com/in/ian-kibet-48407523b/'"
-          />
-          <img
-            src="./assets/github.png"
-            alt="My Github profile"
-            class="icon"
-            onclick="location.href='https://github.com/SirIan71'"
-          />
-        </div>
-      </div>
     </section>
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="./assets/about-pic.png"
-            alt="Profile picture"
-            class="about-pic"
-          />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/experience.png"
-                alt="Experience icon"
-                class="icon"
-              />
-              <h3>Experience</h3>
-              <p>6+ months <br />Data Science</p>
+
+    <!-- Bio Section -->
+    <section id="bio" class="py-5">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <!-- Profile Image -->
+            <div class="col-md-4 text-center">
+                <img src="profile.jpg" alt="Profile Picture" 
+                        class="img-fluid rounded-circle profile-image shadow-lg"
+                        style="max-width: 250px; border: 5px solid var(--primary-color)">
             </div>
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <p>B.Sc. Computer Science <br />Certified Data Scientist</p>
+            
+            <!-- Bio Text -->
+            <div class="col-md-8">
+                <h2 class="mb-4">Hi, I'm Ian 👋</h2>
+                <p class="lead">
+                    Data scientist passionate about transforming raw data into meaningful insights through machine learning 
+                    and AI solutions. With expertise in:
+                </p>
+                <ul class="skills-list list-unstyled">
+                    <li class="mb-2">✅ Advanced predictive modeling</li>
+                    <li class="mb-2">✅ Natural Language Processing (NLP)</li>
+                    <li class="mb-2">✅ Deep learning architectures</li>
+                    <li class="mb-2">✅ AI agent development</li>
+                    <li class="mb-2">✅ Large Language Model (LLM) integration</li>
+                </ul>
+                <div class="mt-4">
+                    <a href="#resume" class="btn btn-primary btn-lg me-3">View Resume</a>
+                    <a href="#contact" class="btn btn-outline-primary btn-lg">Contact Me</a>
+                </div>
             </div>
-          </div>
-          <div class="text-container">
-            <p>
-              I am passionate about leveraging data to drive insights and building intelligent systems. With extensive experience in machine learning, data analysis, and software development, I enjoy solving complex problems and continuously learning new technologies.
-            </p>
-          </div>
         </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      />
+    </div>
     </section>
-    <section id="experience">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Experience</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="experience-sub-title">Data Scientist</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Python</h3>
-                  <p>Intermediate</p>
+
+<!-- Add this CSS -->
+<style>
+    .profile-image {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    .profile-image:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+    }
+
+    .skills-list li {
+        padding-left: 1.5rem;
+        position: relative;
+    }
+
+    .skills-list li::before {
+        content: "▹";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+    }
+
+    #bio {
+        background: rgba(var(--primary-color-rgb), 0.05);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    [data-theme="dark"] #bio {
+        background: rgba(255,255,255,0.05);
+        border-color: rgba(255,255,255,0.1);
+    }
+</style>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Featured Projects</h2>
+            <div class="row g-4">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="project-card h-100 shadow">
+                        <img src="posters/SER.png" class="project-poster w-100" alt="House Pricing">
+                        <div class="p-3">
+                            <h5>Swahili Speech Emotion Recognition</h5>
+                            <p>Localized Customer care Speech Emotion Recognition</p>
+                            <div class="mb-2">
+                                <span class="badge skill-badge">Python</span>
+                                <span class="badge skill-badge">Scikit-learn</span>
+                            </div>
+                            <a href="https://github.com/SirIan71/Speech-Emotion-Recognition-swahili" class="btn btn-sm btn-primary">View Code</a>
+                        </div>
+                    </div>
                 </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>MySQL</h3>
-                  <p>Experienced</p>
+                
+                <!-- Add other projects following same structure -->
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="project-card h-100 shadow">
+                        <img src="posters/house price.jpg" class="project-poster w-100" alt="House Pricing">
+                        <div class="p-3">
+                            <h5>House Price Modeling</h5>
+                            <p>Advanced regression models for real estate pricing</p>
+                            <div class="mb-2">
+                                <span class="badge skill-badge">Python</span>
+                                <span class="badge skill-badge">Scikit-learn</span>
+                            </div>
+                            <a href="https://github.com/SirIan71/House_Prices_Modeling" class="btn btn-sm btn-primary">View Code</a>
+                        </div>
+                    </div>
                 </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Scikit-learn</h3>
-                  <p>Intermediate</p>
+
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="project-card h-100 shadow">
+                        <img src="posters/movie.jpg" class="project-poster w-100" alt="House Pricing">
+                        <div class="p-3">
+                            <h5>Movie Lens Recommendations</h5>
+                            <p>Collaborative filtering for movie recommendations</p>
+                            <div class="mb-2">
+                                <span class="badge skill-badge">Python</span>
+                                <span class="badge skill-badge">Scikit-learn</span>
+                            </div>
+                            <a href="https://github.com/SirIan71/MovieLens-Recommendations-System" class="btn btn-sm btn-primary">View Code</a>
+                        </div>
+                    </div>
                 </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Pandas</h3>
-                  <p>Experienced</p>
+                <!-- Project 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="project-card h-100 shadow">
+                        <img src="posters/crime-analysis.jpg" class="project-poster w-100" alt="House Pricing">
+                        <div class="p-3">
+                            <h5>Chicago Crime Analysis</h5>
+                            <p>Analysis of Chicago crime data using public data</p>
+                            <div class="mb-2">
+                                <span class="badge skill-badge">Python</span>
+                                <span class="badge skill-badge">Scikit-learn</span>
+                            </div>
+                            <a href="https://github.com/SirIan71/Chicago_crime_data_Ml/tree/main" class="btn btn-sm btn-primary">View Code</a>
+                        </div>
+                    </div>
                 </div>
-              </article>
+
+
+
+
             </div>
-          </div>
-          <div class="details-container">
-            <h2 class="experience-sub-title">Linux Administrator</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>PostgreSQL</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Bash</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Open source softwares</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Git</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div>
         </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      />
     </section>
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/chicago arrest prediction.avif"
-                alt="Project 1"
-                class="project-img"
-              />
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Technical Skills</h2>
+            
+            <!-- Python Skills Category -->
+            <div class="skill-category mb-5 p-4 rounded-3" style="background: var(--card-bg)">
+                <h3 class="mb-4">Python Ecosystem</h3>
+                <div class="skills-grid">
+                    <!-- Python -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fab fa-python me-2"></i>
+                                <span>Python</span>
+                            </div>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- Jupyter Notebook -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fab fa-jupyter me-2"></i>
+                                <span>Jupyter Notebook</span>
+                            </div>
+                            <span>100%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- TensorFlow -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fab fa-tensorflow me-2"></i>
+                                <span>TensorFlow</span>
+                            </div>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- AI Agents -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-robot me-2"></i>
+                                <span>AI Agents</span>
+                            </div>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h2 class="experience-sub-title project-title">Chicago Crime</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/SirIan71/Chicago_crime_data_Ml'"
-              >
-                Github
-              </button>
+    
+            <!-- ML & DevOps Category -->
+            <div class="skill-category mb-5 p-4 rounded-3" style="background: var(--card-bg)">
+                <h3 class="mb-4">Machine Learning & DevOps</h3>
+                <div class="skills-grid">
+                    <!-- Machine Learning -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-brain me-2"></i>
+                                <span>Machine Learning</span>
+                            </div>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- LLMs -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-comments me-2"></i>
+                                <span>Large Language Models</span>
+                            </div>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- Docker -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fab fa-docker me-2"></i>
+                                <span>Docker</span>
+                            </div>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 75%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- Ollama -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-robot me-2"></i>
+                                <span>Ollama</span>
+                            </div>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/movie time.avif"
-                alt="Project 2"
-                class="project-img"
-              />
+    
+            <!-- Data & Automation Category -->
+            <div class="skill-category mb-5 p-4 rounded-3" style="background: var(--card-bg)">
+                <h3 class="mb-4">Data & Automation</h3>
+                <div class="skills-grid">
+                    <!-- Tableau -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fab fa-tableau me-2"></i>
+                                <span>Tableau</span>
+                            </div>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- SQL -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-database me-2"></i>
+                                <span>SQL</span>
+                            </div>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- n8n -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-gears me-2"></i>
+                                <span>n8n</span>
+                            </div>
+                            <span>70%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                    </div>
+    
+                    <!-- Networks -->
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-network-wired me-2"></i>
+                                <span>Networks</span>
+                            </div>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h2 class="experience-sub-title project-title">Movie Recommender System</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/SirIan71/MovieLens-Recommendations-System/tree/Pre-Main'"
-              >
-                Github
-              </button>
+    
+            <div class="text-center mt-4">
+                <a href="/docs/Ian_Resume (2).pdf" class="btn btn-lg btn-primary">Read Full Resume</a>
             </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/king county houses.jpg"
-                alt="Project 3"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">House Price Prediction</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/SirIan71/House_Prices_Modeling/tree/Pre-Main'"
-              >
-                Github
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
-      />
     </section>
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon"
-          />
-          <p><a href="mailto:examplemail@gmail.com">iantraven13@gmail.com</a></p>
+    
+    <style>
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+    
+        .skill-item {
+            padding: 1.2rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0);
+            position: relative;
+        }
+    
+        .skill-item:hover {
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+            border: 2px solid var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .skill-item:hover {
+            animation: glow-pulse 1.5s infinite;
+        }
+    
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+    
+        .progress {
+            height: 8px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+    
+        .progress-bar {
+            background: var(--primary-color);
+            transition: width 1s ease-in-out;
+        }
+    
+        .skill-category {
+            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+    
+        [data-theme="dark"] {
+            --primary-color: #27ae60;
+            --primary-color-rgb: 39, 174, 96;
+            --secondary-color: #2980b9;
+            --background-color: #2c3e50;
+            --card-bg: #2a3b4a;  /* Slightly lighter than background */
+            --skill-border: rgba(46, 204, 113, 0.5);
+        }
+
+                /* Add this to your existing dark theme styles */
+        [data-theme="dark"] #resume h2.text-center {
+            color: #0f0e0e !important; /* Light gray instead of pure black */
+            position: relative;
+        }
+
+        
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-header {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Get in Touch</h2>
+            
+            <!-- Social Media Links -->
+            <div class="text-center mb-5">
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="https://www.linkedin.com/in/ian-kibet-48407523b/" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin fa-3x"></i>
+                    </a>
+                    <a href="https://twitter.com/your-handle" target="_blank" class="social-link">
+                        <i class="fab fa-x-twitter fa-3x"></i>
+                    </a>
+                    <a href="https://www.kaggle.com/sirian711" target="_blank" class="social-link">
+                        <i class="fab fa-kaggle fa-3x"></i>
+                    </a>
+                </div>
+            </div>
+    
         </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-          />
-          <p><a href="https://www.linkedin.com/in/ian-kibet-48407523b/">LinkedIn</a></p>
-        </div>
-      </div>
     </section>
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-      <p>Copyright &#169; 2024 SIRIAN. All Rights Reserved.</p>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+
+    <script>
+        function toggleTheme() {
+            document.body.setAttribute('data-theme',
+                document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+            );
+        }
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
